@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+    <h1>Stratégie LinkedIn sur Mesure</h1>
+    <p class="subtitle">Réponds à ces questions pour que notre IA conçoive une stratégie de contenu magnétique, basée sur tes propres forces et résultats.</p>
+    
+    <form action="/generate" method="post" id="strategy-form">
+        <label for="produit">Que vends-tu ? (Ton service principal)</label>
+        <textarea id="produit" name="produit" rows="3" required placeholder="Ex: Rédaction d'articles SEO, gestion de campagnes Meta Ads..."></textarea>
+        
+        <label for="resultat">Quel résultat concret crées-tu pour tes clients ?</label>
+        <textarea id="resultat" name="resultat" rows="3" required placeholder="Ex: J'ai aidé un client SaaS à augmenter ses leads de 30% en 3 mois."></textarea>
+        
+        <label for="client">Qui est ton client idéal ?</label>
+        <textarea id="client" name="client" rows="3" required placeholder="Ex: PME dans le secteur de la tech, directeurs marketing, budget > 2000€/mois."></textarea>
+        
+        <label for="outils">Quels sont tes "trésors cachés" ? (Outils, processus, modèles)</label>
+        <small>Liste ici les checklists, prompts, modèles Notion/Excel ou processus que tu utilises. Ce sont les futures pépites pour attirer tes clients.</small>
+        <textarea id="outils" name="outils" rows="3" required placeholder="Ex: Une checklist d'audit SEO, un prompt ChatGPT secret, un modèle de reporting..."></textarea>
+        
+        <label for="objectifs">Quels sont tes objectifs sur LinkedIn ?</label>
+        <textarea id="objectifs" name="objectifs" rows="2" required placeholder="Ex: Générer 5 leads qualifiés par mois, devenir une référence sur le sujet X."></textarea>
+        
+        <label for="mesures">Quels sont tes résultats mesurables passés ?</label>
+        <textarea id="mesures" name="mesures" rows="2" required placeholder="Ex: Un de mes posts a fait 10 000 vues, j'ai aidé un client à passer de 1k à 10k abonnés."></textarea>
+        
+        <label for="contraintes">Quelles contraintes as-tu ?</label>
+        <textarea id="contraintes" name="contraintes" rows="2" required placeholder="Ex: 1h par semaine à dédier à LinkedIn, pas d'outils payants, réseau de 500 contacts."></textarea>
+
+        <label for="experience">Quel est ton niveau d’expérience sur LinkedIn ?</label>
+        <select id="experience" name="experience" required>
+            <option value="Débutant">Débutant</option>
+            <option value="Intermédiaire">Intermédiaire</option>
+            <option value="Avancé">Avancé</option>
+        </select>
+        
+        <button type="submit">Générer ma stratégie</button>
+    </form>
+
+    <div id="loading-spinner" class="hidden">
+        <div class="spinner"></div>
+        <p>Création de ta stratégie en cours...</p>
+    </div>
+{% endblock %}
