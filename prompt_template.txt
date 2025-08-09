@@ -17,30 +17,31 @@ Si certaines réponses sont incomplètes, précisez les hypothèses faites et le
 --- DEBUT DES DONNEES UTILISATEUR ---
 
 Que vendez-vous ?
-{q1_produit}
+{produit}
 
 Quel résultat ou transformation créez-vous pour vos clients ?
-{q2_resultat}
+{resultat}
 
 Qui est votre client idéal ?
-{q3_client}
+{client}
 
 Quels outils, processus ou actifs internes utilisez-vous déjà ?
-{q4_outils}
+{outils}
 
 Quels sont vos objectifs sur LinkedIn ?
-{q5_objectifs}
+{objectifs}
 
 Quels sont vos résultats mesurables passés ?
-{q6_mesures}
+{mesures}
 
 Quelles contraintes avez-vous ?
-{q7_contraintes}
+{contraintes}
 
 Quel est votre niveau d’expérience sur LinkedIn ?
-{q8_experience}
+{experience}
 
 --- FIN DES DONNEES UTILISATEUR ---
+
 
 Instructions pour l’IA
 

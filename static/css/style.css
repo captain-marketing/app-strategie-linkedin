@@ -140,3 +140,11 @@ button:hover {
 .intro-text p {
     margin: 5px 0;
 }
+.success-message {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 40px 20px;
+    background-color: #eef5f9;
+    border-radius: 8px;
+    border: 1px solid #d1e0e8;
+}
