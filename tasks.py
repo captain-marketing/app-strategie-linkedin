@@ -74,10 +74,14 @@ def send_strategy_email(recipient_email, strategy_markdown):
 
 
 # --- Tâche Celery ---
+# Récupérer l'URL du broker depuis les variables d'environnement
+# Utilise l'URL de Koyeb si elle existe, sinon localhost pour le dev local
+redis_url = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
+
 celery = Celery(
     __name__,
-    broker='redis://localhost:6379/0',
-    backend='redis://localhost:6379/0'
+    broker=redis_url,
+    backend=redis_url
 )
 
 api_key = os.getenv("GEMINI_API_KEY")
