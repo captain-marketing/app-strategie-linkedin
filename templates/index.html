@@ -1,7 +1,8 @@
 {% extends "layout.html" %}
 {% block content %}
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo Captain Marketing" style="display: block; margin: 0 auto 20px auto; width: 150px;">
     <h1>Stratégie LinkedIn sur Mesure</h1>
-    <p class="subtitle">Réponds à ces questions pour que notre IA conçoive une stratégie de contenu magnétique, basée sur tes propres forces et résultats.</p>
+    <p class="subtitle">Réponds à ces questions pour que notre IA conçoive une stratégie de contenu magnétique, basée sur tes propres forces et résultats. Plus tes réponses seront précises et plus ta stratégie Linkedin sera pertinente. Le principe du "garbage in, garbage out" s'applique parfaitement ici. Prends ton temps, avant de formuler tes réponses :)</p>
     
     <form action="/generate" method="post" id="strategy-form">
     <label for="email">Confirme ton e-mail pour être certain(e) de recevoir ta stratégie</label>

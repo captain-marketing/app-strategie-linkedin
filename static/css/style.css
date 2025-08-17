@@ -148,3 +148,12 @@ button:hover {
     border-radius: 8px;
     border: 1px solid #d1e0e8;
 }
+.error-message {
+    text-align: center;
+    font-size: 1.2em;
+    padding: 40px 20px;
+    background-color: #fbe9e7;
+    border-radius: 8px;
+    border: 1px solid #ffab91;
+    color: #d84315;
+}
