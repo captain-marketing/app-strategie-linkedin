@@ -7,22 +7,22 @@ from celery import Celery
 from dotenv import load_dotenv
 import traceback
 
-# Load environment variables for the worker
+# Charger les variables d'environnement pour le worker
 load_dotenv()
 
-# Configuration for sending email
+# Configuration pour l'envoi d'e-mail
 SENDER_EMAIL = os.getenv("EMAIL_ADDRESS")
 SENDER_PASSWORD = os.getenv("EMAIL_APP_PASSWORD")
 
 def send_strategy_email(recipient_email, strategy_markdown):
-    """Prepares and sends the email with the strategy (WITHOUT PDF)."""
+    """Prépare et envoie l'e-mail avec la stratégie directement dans le corps du message."""
     if not SENDER_EMAIL or not SENDER_PASSWORD:
-        print("ERROR: EMAIL_ADDRESS or EMAIL_APP_PASSWORD not configured.")
+        print("ERREUR: EMAIL_ADDRESS ou EMAIL_APP_PASSWORD non configuré.")
         return
 
-    # Convert Markdown to HTML for the email body
+    # Convertir le Markdown en HTML pour un joli e-mail
     strategy_html = markdown2.markdown(
-        strategy_markdown,
+        strategy_markdown, 
         extras=["tables", "fenced-code-blocks"]
     )
 
@@ -55,13 +55,12 @@ def send_strategy_email(recipient_email, strategy_markdown):
         with smtplib.SMTP_SSL('smtp.gmail.com', 465) as smtp:
             smtp.login(SENDER_EMAIL, SENDER_PASSWORD)
             smtp.send_message(msg)
-            print(f"E-mail de stratégie (sans PDF) envoyé avec succès à {recipient_email}")
-
+            print(f"E-mail de stratégie envoyé avec succès à {recipient_email}")
     except Exception as e:
         print("ERREUR détaillée lors de l'envoi de l'e-mail :")
         print(traceback.format_exc())
 
-# --- Celery Task ---
+# --- Tâche Celery ---
 celery = Celery(
     __name__,
     broker=os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0'),
@@ -76,28 +75,19 @@ else:
 
 @celery.task
 def generate_strategy_task(form_data):
-    """
-    Asynchronous task that calls the Gemini API and sends the result via email.
-    """
+    """Tâche asynchrone qui appelle l'API Gemini et envoie le résultat par e-mail."""
     model = genai.GenerativeModel('gemini-1.5-pro-latest')
     recipient = form_data.get('email', None)
-
     if not recipient:
-        print("ERROR: No recipient email to send the result to.")
-        return "Failure: missing email."
-
+        return "Échec : e-mail manquant."
     try:
         with open('prompt_template.txt', 'r', encoding='utf-8') as f:
             prompt_template = f.read()
-
         final_prompt = prompt_template.format(**form_data)
         response = model.generate_content(final_prompt)
-
         send_strategy_email(recipient, response.text)
-
-        return "Task completed and email sent."
-
+        return "Tâche complétée et e-mail envoyé."
     except Exception as e:
-        print("Detailed ERROR in generate_strategy_task:")
+        print("ERREUR détaillée dans generate_strategy_task :")
         print(traceback.format_exc())
-        return f"Task Failure: {e}"
+        return f"Échec de la tâche : {e}"
