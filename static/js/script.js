@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     } else {
                         formResponseContainer.innerHTML = `<p class="error-message">❌ Une erreur est survenue.</p>`;
                     }
-                }, 7000);
+                }, 4000);
             })
             .catch(error => {
                 spinner.classList.add('hidden');
