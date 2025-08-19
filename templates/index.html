@@ -6,7 +6,7 @@
     
     <form action="/generate" method="post" id="strategy-form">
     <label for="email">Confirme ton e-mail pour être certain(e) de recevoir ta stratégie</label>
-    <input type="email" id="email" name="email" required placeholder="Ton e-mail">
+    <input type="email" id="email" name="email" value="{{ user_email }}" required placeholder="Pour être certain(e) de recevoir ta stratégie">
     
     <label for="produit">Que vends-tu ? (Ton service principal)</label>
     <textarea id="produit" name="produit" rows="3" required placeholder="Ex: Rédaction d'articles SEO, gestion de campagnes Meta Ads..."></textarea>

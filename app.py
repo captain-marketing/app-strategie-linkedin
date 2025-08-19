@@ -21,10 +21,15 @@ limiter = Limiter(
     strategy="fixed-window",
 )
 
+# Assure-toi que 'request' est bien importé en haut du fichier
+# from flask import Flask, render_template, request, jsonify
+
 @app.route('/')
 def index():
-    """Affiche la page d'accueil avec le formulaire."""
-    return render_template('index.html')
+    """Affiche la page d'accueil et pré-remplit l'e-mail si présent dans l'URL."""
+    # On récupère la valeur du paramètre 'email' dans l'URL
+    user_email = request.args.get('email', '')
+    return render_template('index.html', user_email=user_email)
 
 @app.route('/generate', methods=['POST'])
 @limiter.limit("5 per hour")
